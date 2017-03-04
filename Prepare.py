@@ -41,11 +41,11 @@ if __name__ == '__main__':
 	for span in doc.sents:
 		sents.append([doc[i] for i in range(span.start, span.end)])
 
+
 	for sent in sents:
-		for i, token in enumerate(sent):
-			if token.pos_ == 'SPACE':
-				continue
+		sent_prime = [token for token in sent if token.pos_ != 'SPACE']
+		for i, token in enumerate(sent_prime):
 			parsed_line = suftab(str(i+1)) + suftab(token.orth_) + suftab('_') + suftab(token.pos_) + suftab(token.pos_)
-			parsed_line += suftab('_') + suftab(str(token.i)) + suftab(token.dep_) + '_\t_\n'
+			parsed_line += suftab('_') + suftab(str(sent_prime.index(token.head))) + suftab(token.dep_) + '_\t_\n'
 			output.write(parsed_line)
 		output.write('\n')
