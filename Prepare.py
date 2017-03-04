@@ -9,7 +9,7 @@ def joinMovies(movie_names, combo_name):
 	print('joining movies')
 	cn = open(combo_name, 'w')
 	for movie in movie_names:
-		mn = open(movie)
+		mn = open('movies\\' + movie)
 		cn.writelines(mn)
 		cn.write('\n')
 	cn.close()
@@ -43,5 +43,9 @@ if __name__ == '__main__':
 
 	for sent in sents:
 		for i, token in enumerate(sent):
+			if token.pos_ == 'SPACE':
+				continue
 			parsed_line = suftab(str(i+1)) + suftab(token.orth_) + suftab('_') + suftab(token.pos_) + suftab(token.pos_)
 			parsed_line += suftab('_') + suftab(str(token.i)) + suftab(token.dep_) + '_\t_\n'
+			output.write(parsed_line)
+		output.write('\n')
