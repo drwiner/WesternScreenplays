@@ -159,9 +159,13 @@ def getDistinctiveWords_per_cat(freq_cutoff, shaver=None):
 from collections import defaultdict
 wep = open('western.extractionpattern')
 western_pattern_dict = defaultdict(set)
+word_instances = []
+pattern_instances = []
 for line in wep:
 	lsplit = line.split()
 	western_pattern_dict[lsplit[0].strip()].add(lsplit[2])
+	word_instances.append(lsplit[0])
+	pattern_instances.append(lsplit[2])
 wep.close()
 
 import math
@@ -174,7 +178,8 @@ def scoreWord(word, patterns):
 	for pattern in patterns:
 		if pattern not in western_pattern_dict[word]:
 			continue
-		log_score = math.log2(len([pat for pat in western_pattern_dict[word] if pat == pattern]) + 1)
+		p_instances = [pat for i, pat in enumerate(pattern_instances) if word_instances[i] == word and pat == pattern]
+		log_score = math.log2(len(p_instances) + 1)
 		pat_values.append(log_score)
 	if len(pat_values) > 0:
 		return float(sum(pat_values) / len(pat_values))

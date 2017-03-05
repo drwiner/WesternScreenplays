@@ -1,0 +1,14 @@
+man
+boy
+woman
+girl
+men
+sergeant
+driver
+engineer
+singer
+lieutenant
+sheriff
+bartender
+clerk
+leader

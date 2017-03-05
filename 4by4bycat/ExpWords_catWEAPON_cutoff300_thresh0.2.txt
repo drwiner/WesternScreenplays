@@ -1,0 +1,17 @@
+pistol
+rifle
+gun
+guns
+weapon
+rifles
+shotgun
+revolver
+weapons
+carbine
+knife
+sword
+arrows
+arrow
+shot
+army
+fires

@@ -1,0 +1,7 @@
+man
+boy
+woman
+girl
+sergeant
+engineer
+clerk

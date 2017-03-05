@@ -1,0 +1,8 @@
+wagon
+horse
+truck
+horses
+car
+train
+mules
+mustang

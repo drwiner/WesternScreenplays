@@ -1,0 +1,5 @@
+glass
+bottle
+table
+drink
+phone

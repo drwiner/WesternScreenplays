@@ -1,0 +1,7 @@
+glass
+bottle
+table
+drink
+desk
+cigarette
+pipe

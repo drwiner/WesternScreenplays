@@ -1,0 +1,14 @@
+glass
+bottle
+table
+drink
+desk
+box
+cigarette
+smoke
+pipe
+wine
+shower
+tray
+lamp
+bags
