@@ -31,11 +31,11 @@ def readPattern(pattern_file_name):
 
 if __name__ == '__main__':
 
-	base = False
-	semantic = True
-	experiment = False
-	cutoffs = [200, 400]
-	thresholds = [0.4, 0.6]
+	base = True
+	semantic = False
+	experiment = True
+	cutoffs = [100, 500]
+	thresholds = [0.1, 0.6]
 
 	if base:
 		baseline_list = makeBaselineSeeds()

@@ -1,0 +1,17 @@
+house
+town
+street
+building
+village
+road
+room
+porch
+alley
+door
+office
+camp
+stairs
+bar
+cabin
+river
+lodge

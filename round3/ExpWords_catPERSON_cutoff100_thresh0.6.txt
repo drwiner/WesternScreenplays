@@ -1,0 +1,5 @@
+man
+boy
+woman
+girl
+sergeant
