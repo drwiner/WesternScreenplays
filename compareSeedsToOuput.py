@@ -124,13 +124,19 @@ all_nouns_file = open('all_nouns')
 nouns = getVocab([w.split()[0] for w in all_nouns_file])
 all_nouns_file.close()
 
+
 def pairwiseCategory_topMembers(cats, freq_cutoff, shaving_adder=None):
 	distinctive_words_per_cat = list()
 	for cat in cats:
+
+		# calculate noun - category similarities
 		top_cat_words = sim3(cat, nouns, freq_cutoff)
+
+		# remove other cats
 		top_cat_list = list(top_cat_words)
 		other_cats = list(cats)
 		other_cats.remove(cat)
+
 		binary_eval = [isGoodCndt(wrd, cat, other_cats) for wrd in top_cat_list]
 		top_distinctive_words = [wrd for i, wrd in enumerate(top_cat_list) if binary_eval[i]]
 		distinctive_words_per_cat.append(top_distinctive_words)
@@ -139,7 +145,7 @@ def pairwiseCategory_topMembers(cats, freq_cutoff, shaving_adder=None):
 
 
 # find the most common nouns which are most similar to the category members, top 20-len(category_members)
-def getDistinctiveWords_per_cat(freq_cutoff, shaver):
+def getDistinctiveWords_per_cat(freq_cutoff, shaver=None):
 
 	distinctive_words_per_cat, c_labels = pairwiseCategory_topMembers(cats, freq_cutoff, shaver)
 	for i, cat in enumerate(distinctive_words_per_cat):
@@ -160,6 +166,7 @@ wep.close()
 
 import math
 
+# words scored on the basis of patterns from Basilisk
 def scoreWord(word, patterns):
 	if word not in western_pattern_dict.keys():
 		return 0
