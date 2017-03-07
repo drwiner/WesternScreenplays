@@ -1,9 +1,19 @@
 import subprocess
-from compareSeedsToOuput import getDistinctiveWords_per_cat, makeBaseLineSeeds, scoreWord
+from semantic_induction import update, fit, makeBaseLineSeeds
 
 baseline_seeds = []
 special_seeds = []
 
+# CUTOFFS = [500, 200, 200, 400, 400]
+# THRESHOLDS = [0, .4, .6, .4, .6]
+
+CUTOFFS = [100, 500]
+THRESHOLDS = [0.1, 0.6]
+
+APPROX = 500
+
+#############################################################
+""" seed and pattern reading and loading """
 def makeSeedFile(label, cat):
 	seed_file = open('seeds\\' + label.upper(), 'w')
 	seed_file.write('\n'.join([seed.orth_ for seed in cat]))
@@ -16,27 +26,37 @@ def makeBaselineSeeds():
 
 	return cats_dict.keys()
 
-def makeSeedLists(freq):
-	distinctive_words_per_cat, cat_labels = getDistinctiveWords_per_cat(freq)
+def makeSeedLists(distinctive_words_per_cat, cat_labels):
 	for i, cat in enumerate(distinctive_words_per_cat):
 		makeSeedFile(cat_labels[i], cat)
-
-	return cat_labels
+	return
 
 def readPattern(pattern_file_name):
 	pfn = open(pattern_file_name)
 	pattern_dict = {line.split()[0]: line.split()[2] for line in pfn}
 	pfn.close()
 	return pattern_dict
+##############################################################
 
+
+import sys
 if __name__ == '__main__':
 
-	base = True
-	semantic = False
-	experiment = True
-	cutoffs = [100, 500]
-	thresholds = [0.1, 0.6]
+	try:
+		base = bool(int(sys.argv[1]))
+		semantic = bool(int(sys.argv[2]))
+		experiment = bool(int(sys.argv[3]))
+	except:
+		# score patterns on baseline seeds
+		base = True
+		# score patterns with update seeds
+		semantic = False
+		# run update conditions
+		experiment = True
 
+	print('args:[base:\'' + str(int(base)) + ', sem:' + str(int(semantic)) + ', exp:' + str(int(experiment)) + '\']')
+
+	# write baseline seeds and score patterns
 	if base:
 		baseline_list = makeBaselineSeeds()
 
@@ -45,16 +65,21 @@ if __name__ == '__main__':
 		bsl.write('\n'.join([label.upper() for label in baseline_list]))
 		bsl.close()
 
+		# score patterns
 		command = 'java -jar BASILISK2.0.jar baseline-seeds-list.txt Western.extractionpattern stopwords.dat -n 1 -o baseline_output\ -t'
 		print(command)
 		subprocess.call(command, shell=True)
 	else:
+		# load category names
 		baseline_list = makeBaseLineSeeds().keys()
 
+	# write updated seeds and score patterns
 	if semantic:
-		# distinctive_words_per_cat, cat_labels = getDistinctiveWords_per_cat(500)
-		# cat_dict = dict(zip(cat_labels, distinctive_words_per_cat))
-		cat_list = makeSeedLists(500)
+		# Update
+		candts, cat_list = update(APPROX)
+		makeSeedLists(candts, cat_list)
+
+
 		sl = open('seeds-list.txt', 'w')
 		sl.write('seeds/\n')
 		sl.write('\n'.join([label.upper() for label in cat_list]))
@@ -68,16 +93,18 @@ if __name__ == '__main__':
 
 
 	if experiment:
-		# threshold_score = 0.2
+		# for paper, load baseline seeds
 		pattern_file_names = ['baseline_output/' + label.upper() + '.patterns' for label in baseline_list]
 		patterns = [readPattern(pfn) for pfn in pattern_file_names]
-		best_patterns = [[[p for p, v in p_dict.items() if float(v) >= th] for p_dict in patterns] for th in thresholds]
+
+		# patterns above threshold are best_patterns
+		best_patterns = [[[p for p, v in p_dict.items() if float(v) >= th] for p_dict in patterns] for th in THRESHOLDS]
 		distinctive_words_per_cat_per_cutoff = []
 
-		from collections import defaultdict
+		# from collections import defaultdict
 
-		for cutoff in cutoffs:
-			distinctive_words_per_cat, cat_labels = getDistinctiveWords_per_cat(cutoff)
+		for cutoff in CUTOFFS:
+			distinctive_words_per_cat, cat_labels = update(cutoff)
 			cat_dict = dict(zip(cat_labels, distinctive_words_per_cat))
 			distinctive_words_per_cat_per_cutoff.append(cat_dict)
 
@@ -88,22 +115,15 @@ if __name__ == '__main__':
 				print('_________')
 
 				for j, bp in enumerate(best_patterns):
-					exp_name = 'ExpWords_cat' + str(cat_name) + '_cutoff' + str(cutoff) + '_thresh' + str(thresholds[j]) + '.txt'
+					exp_name = 'ExpWords_cat' + str(cat_name) + '_cutoff' + str(cutoff) + '_thresh' + str(THRESHOLDS[j]) + '.txt'
 					catname_cutoff_file = open(exp_name, 'w')
 
 					for wrd in cat_words:
-						sw = scoreWord(wrd.orth_, bp[i])
+						# measure fit of word with best patterns
+						sw = fit(wrd.orth_, bp[i])
 						if sw > 0:
 							# cut_off_dict[cat_name].append(wrd.orth_, sw)
 							catname_cutoff_file.write(wrd.orth_ + '\n')
 							print(wrd.orth_, sw)
 
 					catname_cutoff_file.close()
-
-
-	# 4 - score each word, print them in sorted order
-
-
-
-
-	# then, compare performanc
