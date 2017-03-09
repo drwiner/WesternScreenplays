@@ -7,10 +7,10 @@ special_seeds = []
 # CUTOFFS = [500, 200, 200, 400, 400]
 # THRESHOLDS = [0, .4, .6, .4, .6]
 
-CUTOFFS = [100, 500]
-THRESHOLDS = [0.1, 0.6]
+CUTOFFS = [200, 400, 600]
+THRESHOLDS = [0, 0.1, 0.5]
 
-APPROX = 500
+APPROX = 600
 
 #############################################################
 """ seed and pattern reading and loading """
@@ -48,11 +48,11 @@ if __name__ == '__main__':
 		experiment = bool(int(sys.argv[3]))
 	except:
 		# score patterns on baseline seeds
-		base = True
+		base = False
 		# score patterns with update seeds
-		semantic = False
+		semantic = True
 		# run update conditions
-		experiment = True
+		experiment = False
 
 	print('args:[base:\'' + str(int(base)) + ', sem:' + str(int(semantic)) + ', exp:' + str(int(experiment)) + '\']')
 
@@ -86,14 +86,14 @@ if __name__ == '__main__':
 		sl.close()
 
 
-		command = 'java -jar BASILISK2.0.jar seeds-list.txt Western.extractionpattern stopwords.dat -n 1 -o basilisk_output\ -t'
+		command = 'java -jar BASILISK2.0.jar seeds-list.txt Western.extractionpattern stopwords.dat -n 5 -o basilisk_output\ -t'
 		print(command)
 		subprocess.call(command, shell=True)
 
 
 
 	if experiment:
-		# for paper, load baseline seeds
+		# load baseline patterns
 		pattern_file_names = ['baseline_output/' + label.upper() + '.patterns' for label in baseline_list]
 		patterns = [readPattern(pfn) for pfn in pattern_file_names]
 

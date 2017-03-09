@@ -1,0 +1,10 @@
+town
+street
+road
+room
+office
+camp
+bar
+plaza
+gate
+block

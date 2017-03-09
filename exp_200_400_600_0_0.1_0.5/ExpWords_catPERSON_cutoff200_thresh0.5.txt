@@ -1,0 +1,15 @@
+man
+boy
+woman
+girl
+soldier
+men
+officer
+sergeant
+rider
+driver
+fellow
+women
+engineer
+brothers
+boss

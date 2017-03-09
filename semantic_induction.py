@@ -149,3 +149,10 @@ def fit(word, patterns):
 	if len(pat_values) > 0:
 		return float(sum(pat_values) / len(pat_values))
 	return 0
+
+# def rlogf(parse_file, cat):
+# 	cat_patterns = 0
+# 	for line in parse_file:
+# 		sp = line.split()
+# 		for wrd in cat:
+# 			if sp[0] == wrd:

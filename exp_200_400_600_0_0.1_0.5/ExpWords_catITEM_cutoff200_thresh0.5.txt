@@ -1,0 +1,9 @@
+glass
+bottle
+table
+drink
+box
+cigarette
+pipe
+bucket
+candle
