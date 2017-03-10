@@ -1,25 +1,25 @@
-identity
-flare
-plea
-bare
-glints
-grasp
-pressure
-withers
-throat
-rump
-whithers
-brow
-cries
-muzzle
-nose
-chest
-vest
-wrist
-cheek
-heart
-midsection
-knees
-stomach
-chin
-ankles
+identity    0
+flare   0
+plea    0
+bare    0
+glints  0
+grasp   0
+pressure    0
+withers 0
+throat  1
+rump    0
+whithers    0
+brow    1
+cries   0
+muzzle  0
+nose    1
+chest   1
+vest    0
+wrist   1
+cheek   1
+heart   1
+midsection  1
+knees   1
+stomach 1
+chin    1
+ankles  1

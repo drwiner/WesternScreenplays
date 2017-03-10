@@ -1,25 +1,25 @@
-executioner
-coach
-pageant
-riderless
-raise
-tintypes
-carriage
-stage
-scuffle
-mare
-jingling
-wagons
-posse
-vehicles
-float
-vehicle
-buckboard
-guys
-saddles
-mount
-convoy
-grocer
-riders
-bullets
-dawn
+executioner 0
+coach   0
+pageant 0
+riderless   0
+raise   0
+tintypes    0
+carriage    1
+stage   0
+scuffle 0
+mare    1
+jingling    0
+wagons  1
+posse   0
+vehicles    1
+float   0
+vehicle 1
+buckboard   1
+guys    0
+saddles 0
+mount   0
+convoy  1
+grocer  0
+riders  0
+bullets 0
+dawn    0

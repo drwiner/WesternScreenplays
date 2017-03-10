@@ -48,11 +48,11 @@ if __name__ == '__main__':
 		experiment = bool(int(sys.argv[3]))
 	except:
 		# score patterns on baseline seeds
-		base = False
+		base = True
 		# score patterns with update seeds
-		semantic = True
+		semantic = False
 		# run update conditions
-		experiment = False
+		experiment = True
 
 	print('args:[base:\'' + str(int(base)) + ', sem:' + str(int(semantic)) + ', exp:' + str(int(experiment)) + '\']')
 

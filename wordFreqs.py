@@ -5,10 +5,11 @@ nlp = spacy.load('en')
 
 if __name__ == '__main__':
 
-	print('reading')
 	raw_doc = ''
 	for line in open('combo.txt'):
-		raw_doc += line
+		sp = line.split()
+		raw_doc += ' '.join(wrd.strip() for wrd in sp if wrd != '\n')
+		raw_doc += ' '
 	doc = nlp(raw_doc)
 
 	print('parsing')

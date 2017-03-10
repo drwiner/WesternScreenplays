@@ -1,25 +1,25 @@
-infinity
-demeanor
-alley
-hideout
-whimper
-highway
-badlands
-MOHR.REACHES
-ravine
-sanctum
-cutoff
-driveway
-draw
-auditorium
-graze
-arroyo
-canyon
-dot
-yard
-enterprise
-torrent
-plot
-incline
-stairway
-pavement
+infinity    0
+demeanor    0
+alley   1
+hideout 1
+whimper 0
+highway 1
+badlands    1
+MOHR.REACHES    0
+ravine  1
+sanctum 1
+cutoff  0
+driveway    1
+draw    0
+auditorium  1
+graze   0
+arroyo  0
+canyon  1
+dot 0
+yard    1
+enterprise  0
+torrent 0
+plot    0
+incline 0
+stairway    1
+pavement    0
