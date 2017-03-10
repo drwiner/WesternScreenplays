@@ -1,8 +1,0 @@
-man
-boy
-woman
-girl
-men
-sergeant
-driver
-engineer

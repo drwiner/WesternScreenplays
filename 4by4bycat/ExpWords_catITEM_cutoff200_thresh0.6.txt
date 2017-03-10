@@ -1,4 +1,0 @@
-glass
-bottle
-table
-drink
